@@ -1315,6 +1315,16 @@ RUN if [ ${INSTALL_GIT_PROMPT} = true ]; then \
 
 RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
+###########################################################################
+# Add user laradock to www-data group:
+###########################################################################
+
+USER root
+
+RUN if [ $(getent group www-data) ]; then
+  usermod -a -G www-data laradock \
+;fi
+
 #
 #--------------------------------------------------------------------------
 # Final Touch
