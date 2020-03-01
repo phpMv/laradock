@@ -177,6 +177,20 @@ RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
 
 ###########################################################################
+# Non-root user : Ubiquity devtools
+###########################################################################
+
+USER laradock
+
+ARG UBIQUITY_DEVTOOLS_GLOBAL_INSTALL
+
+RUN if [ ${UBIQUITY_DEVTOOLS_GLOBAL_INSTALL} = true ]; then \
+    composer global require phpmv/ubiquity-devtools && \
+    chmod +x ~/.composer/vendor/bin/Ubiquity && \
+    ln -s ~/.composer/vendor/bin/Ubiquity ~/.composer/vendor/bin/ubiquity \
+;fi
+
+###########################################################################
 # Non-root user : PHPUnit path
 ###########################################################################
 
