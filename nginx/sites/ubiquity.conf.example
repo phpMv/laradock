@@ -1,0 +1,41 @@
+server {
+    server_name ubiquity.test;
+    root /var/www/firstProject;
+    index index.php;
+    listen 80;
+    listen [::]:80;
+
+    location / {
+        # try to serve file directly, fallback to index.php
+        rewrite ^/(.*)$ /index.php?c=$1 last;
+    }
+
+    location = /index.php{
+        fastcgi_pass php-upstream;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+        fastcgi_param SCRIPT_FILENAME  $document_root/index.php;
+        #fixes timeouts
+        fastcgi_read_timeout 600;
+        fastcgi_param HTTPS off;
+    }
+
+    # return 404 for all other php files not matching the front controller
+    # this prevents access to other php files you don't want to be accessible.
+    location ~ \.php$ {
+        return 404;
+    }
+
+    location /public/ {
+        allow all;
+        try_files $uri $uri/ =404;
+    }
+
+    location /.*/ {
+       deny all;
+    }
+
+    error_log /var/log/nginx/project_error.log;
+    access_log /var/log/nginx/project_access.log;
+}
