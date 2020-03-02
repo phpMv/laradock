@@ -141,12 +141,12 @@ COPY ./composer.json $COMPOSER_HOME/composer.json
 # Add the auth.json for magento 2 credentials
 COPY ./auth.json $COMPOSER_HOME/auth.json
 
-# Make sure that ~/.composer belongs to laradock
-RUN chown -R laradock:laradock $COMPOSER_HOME
-
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
+
+# Make sure that ~/.composer belongs to laradock
+RUN chown -R laradock:laradock $COMPOSER_HOME
 
 USER laradock
 
