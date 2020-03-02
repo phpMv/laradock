@@ -20,6 +20,7 @@ cp env-example .env
 docker-compose up -d nginx mysql phpmyadmin workspace
 ```
 5 - Open your browser and visit localhost: `http://127.0.0.1`
+
 6 - Run the laradock bash workspace
 ```
 docker-compose exec --user=laradock workspace bash
