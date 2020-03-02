@@ -146,7 +146,7 @@ RUN chown -R laradock:laradock $COMPOSER_HOME
 
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
-    echo 'export PATH="$HOME/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+    echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
 
 USER laradock
 
@@ -175,11 +175,6 @@ RUN if [ ${COMPOSER_REPO_PACKAGIST} ]; then \
     composer config -g repo.packagist composer ${COMPOSER_REPO_PACKAGIST} \
 ;fi
 
-# Export composer vendor path
-RUN echo "" >> ~/.bashrc && \
-    echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
-
-USER root
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
     echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
