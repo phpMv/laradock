@@ -21,6 +21,7 @@ ARG LARADOCK_PHP_VERSION
 
 # Set Environment Variables
 ENV DEBIAN_FRONTEND noninteractive
+ENV COMPOSER_HOME /usr/local/composer
 
 # If you're in China, or you need to change sources, will be set CHANGE_SOURCE to true in .env.
 
@@ -131,11 +132,6 @@ RUN echo "" >> ~/.bashrc && \
 ###########################################################################
 
 USER root
-
-# Set COMPOSER_HOME
-RUN echo "" >> /etc/environment && \
-    echo 'export COMPOSER_HOME="/usr/local/composer"' >> /etc/environment
-RUN  /bin/bash -c "source /etc/environment"
 
 # Add the composer.json
 COPY ./composer.json /home/laradock/.composer/composer.json
