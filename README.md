@@ -1,3 +1,31 @@
+![img](https://github.com/richardbmx/ubiquity/blob/master/Banner/banner.png?raw=true)
+This project is a [Laradock](https://github.com/laradock/laradock) fork, adapted to the [Ubiquity Framework](https://github.com/phpmv/ubiquity).
+
+## Quick start
+
+1 - Create a working folder **ws**:
+```
+mkdir ws && cd ws
+```
+2 - Clone this repository in the **ws** folder:
+```
+git clone https://github.com/phpMv/laradock.git
+```
+3 - Go to the laradock folder and copy **env-example** to **.env**:
+```
+cp env-example .env
+```
+4 - Run your container:
+```
+docker-compose up -d nginx mysql phpmyadmin workspace
+```
+5 - Open your browser and visit localhost: `http://127.0.0.1`
+6 - Run the laradock bash workspace
+```
+docker-compose exec user=laradock workspace bash
+```
+7 - Run `ubiquity version`
+
 <p align="center">
     <img src="/.github/home-page-images/laradock-logo.jpg?raw=true" alt="Laradock Logo"/>
 </p>
