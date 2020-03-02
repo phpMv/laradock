@@ -136,13 +136,13 @@ USER root
 RUN mkdir /usr/local/composer
 
 # Add the composer.json
-COPY ./composer.json /home/laradock/.composer/composer.json
+COPY ./composer.json $COMPOSER_HOME/composer.json
 
 # Add the auth.json for magento 2 credentials
-COPY ./auth.json /home/laradock/.composer/auth.json
+COPY ./auth.json $COMPOSER_HOME/auth.json
 
 # Make sure that ~/.composer belongs to laradock
-RUN chown -R laradock:laradock /home/laradock/.composer
+RUN chown -R laradock:laradock $COMPOSER_HOME
 
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
@@ -165,7 +165,7 @@ ENV COMPOSER_AUTH ${COMPOSER_AUTH}
 
 RUN if [ ${COMPOSER_AUTH} = false ]; then \
     # remove the file
-    rm /home/laradock/.composer/auth.json \
+    rm $COMPOSER_HOME/auth.json \
 ;fi
 
 ARG COMPOSER_REPO_PACKAGIST
