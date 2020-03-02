@@ -1330,7 +1330,7 @@ RUN set -xe; php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 
 USER root
 
-RUN if [ $(getent group www-data) ]; then
+RUN if [ $(getent group www-data) ]; then \
   usermod -a -G www-data laradock \
 ;fi
 
