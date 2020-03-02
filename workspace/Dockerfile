@@ -133,6 +133,8 @@ RUN echo "" >> ~/.bashrc && \
 
 USER root
 
+RUN mkdir /usr/local/composer
+
 # Add the composer.json
 COPY ./composer.json /home/laradock/.composer/composer.json
 
