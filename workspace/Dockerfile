@@ -134,7 +134,7 @@ USER root
 
 # Set COMPOSER_HOME
 RUN echo "" >> /etc/environment && \
-    echo 'COMPOSER_HOME="/usr/local/composer"' >> /etc/environment
+    echo 'export COMPOSER_HOME="/usr/local/composer"' >> /etc/environment
 RUN  /bin/bash -c "source /etc/environment"
 
 # Add the composer.json
