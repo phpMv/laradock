@@ -132,6 +132,10 @@ RUN echo "" >> ~/.bashrc && \
 
 USER root
 
+# Set COMPOSER_HOME
+RUN echo "" >> /etc/environment && \
+    echo 'COMPOSER_HOME="/usr/local/composer"' >> /etc/environment
+
 # Add the composer.json
 COPY ./composer.json /home/laradock/.composer/composer.json
 
@@ -174,20 +178,25 @@ RUN if [ ${COMPOSER_REPO_PACKAGIST} ]; then \
 
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
-    echo 'export PATH="~/.composer/vendor/bin:$PATH"' >> ~/.bashrc
+    echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
+
+USER root
+# Export composer vendor path
+RUN echo "" >> ~/.bashrc && \
+    echo 'export PATH="$COMPOSER_HOME/vendor/bin:$PATH"' >> ~/.bashrc
 
 ###########################################################################
-# Non-root user : Ubiquity devtools
+# Root user : Ubiquity devtools
 ###########################################################################
 
-USER laradock
+USER root
 
 ARG UBIQUITY_DEVTOOLS_GLOBAL_INSTALL
 
 RUN if [ ${UBIQUITY_DEVTOOLS_GLOBAL_INSTALL} = true ]; then \
     composer global require phpmv/ubiquity-devtools && \
-    chmod +x ~/.composer/vendor/bin/Ubiquity && \
-    ln -s ~/.composer/vendor/bin/Ubiquity ~/.composer/vendor/bin/ubiquity \
+    chmod +x $COMPOSER_HOME/vendor/bin/Ubiquity && \
+    ln -s $COMPOSER_HOME/vendor/bin/Ubiquity $COMPOSER_HOME/vendor/bin/ubiquity \
 ;fi
 
 ###########################################################################
