@@ -142,7 +142,7 @@ COPY ./composer.json $COMPOSER_HOME/composer.json
 COPY ./auth.json $COMPOSER_HOME/auth.json
 
 # Make sure that ~/.composer belongs to laradock
-RUN chown -R laradock:laradock $COMPOSER_HOME
+#RUN chown -R laradock:laradock $COMPOSER_HOME
 
 # Export composer vendor path
 RUN echo "" >> ~/.bashrc && \
