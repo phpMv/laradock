@@ -134,8 +134,8 @@ USER root
 
 # Set COMPOSER_HOME
 RUN echo "" >> /etc/environment && \
-    echo 'COMPOSER_HOME="/usr/local/composer"' >> /etc/environment && \
-    source /etc/environment
+    echo 'COMPOSER_HOME="/usr/local/composer"' >> /etc/environment
+RUN source /etc/environment
 
 # Add the composer.json
 COPY ./composer.json /home/laradock/.composer/composer.json
