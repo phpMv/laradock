@@ -27,6 +27,25 @@ docker-compose exec --user=laradock workspace bash
 ```
 7 - Run `ubiquity version`
 
+8 - Ubiquity project
+  - For an existing project:
+    it must be in the **ws** folder, on the same level as the **laradock** folder.
+    
+```
+ws
+   \laradock
+   \ubiquity-project
+```
+- For the creation of a project:
+  - Start the workspace bash prompt.
+  ```
+  docker-compose exec --user=laradock workspace bash
+  ```
+  - Run the devtools **new** command
+  ```
+  ubiquity new myProject -a
+  ```
+  
 <p align="center">
     <img src="/.github/home-page-images/laradock-logo.jpg?raw=true" alt="Laradock Logo"/>
 </p>
